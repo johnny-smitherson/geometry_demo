@@ -8,5 +8,6 @@ pub struct VCellRaw {
     pub volume: f64,
     pub position: Vec3,
     pub centroid: Vec3,
+    #[allow(unused)]
     pub face_normals: Vec<Vec3>,
 }

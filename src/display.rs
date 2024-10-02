@@ -127,7 +127,7 @@ fn draw_decomposition_gizmos(
 
 fn draw_gizmos(
     cells: &Vec<VCellRaw>,
-    mask: &Vec<bool>,
+    mask: &[bool],
     offset: Vec3,
     gizmos: &mut Gizmos,
     color: impl Into<Color> + Clone,
@@ -143,8 +143,8 @@ fn draw_gizmos(
             let mut face_ids_shift = face_ids.clone();
             face_ids_shift.rotate_right(1);
             for (i1, i2) in face_ids.iter().zip(face_ids_shift.iter()) {
-                if !edge_hash.contains_key(&(*i1, *i2)) {
-                    edge_hash.insert((*i1, *i2), ());
+                if let std::collections::hash_map::Entry::Vacant(e) = edge_hash.entry((*i1, *i2)) {
+                    e.insert(());
 
                     let p1 = offset + cell.vs[*i1 as usize];
                     let p2 = offset + cell.vs[*i2 as usize];
@@ -155,7 +155,7 @@ fn draw_gizmos(
     }
 }
 
-fn voronoi_demo(mut commands: Commands) -> () {
+fn voronoi_demo(mut commands: Commands) {
     info!("hello world 1");
     warn!("hello world 2");
     error!("hello world 3");

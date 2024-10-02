@@ -40,6 +40,7 @@ pub fn uv_debug_texture() -> Image {
 }
 
 #[rustfmt::skip]
+#[allow(dead_code)]
 pub fn create_cube_mesh() -> Mesh {
     // Keep the mesh data accessible in future frames to be able to mutate it in toggle_texture.
     Mesh::new(PrimitiveTopology::TriangleList, RenderAssetUsages::MAIN_WORLD | RenderAssetUsages::RENDER_WORLD)
